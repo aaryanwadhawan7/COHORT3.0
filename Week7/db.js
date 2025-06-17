@@ -1,7 +1,7 @@
 // Cluster -> Databases -> Collections -> Documents 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://aaryanwadhawan:aaryanisacr7fan@aaryancluster.zwf0tfc.mongodb.net/user-todo-db');
+mongoose.connect('');
 
 // 1. Define the schema
 // Schema -> class
