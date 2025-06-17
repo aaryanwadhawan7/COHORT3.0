@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express Auth</title>
+    <link rel="stylesheet" href="./signin.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+
+    <script>
+      async function signin() {
+        const username = document.getElementById("signin-username").value;
+        const password = document.getElementById("signin-password").value;
+
+        try {
+          const response = await axios.post("http://localhost:3000/signin", {
+            username: username,
+            password: password
+          });
+
+          localStorage.setItem("token", response.data.token);
+          alert("You are SignedIn successfully!");
+          window.location.href = "userInfo.html"; // redirect
+        } catch (error) {
+            alert("SignedIn Failed!");
+            console.log(error.message);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="signin">
+      <h1 id="heading">Signin</h1>
+      <label for="signin-username">Username</label>
+      <input
+        type="text"
+        name="username"
+        id="signin-username"
+        placeholder="Enter Username"
+      />
+      <label for="signin-password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="signin-password"
+        placeholder="Enter Password"
+      />
+      <button onclick="signin()" id="submitBtn">Submit</button>
+    </div>
+  </body>
+</html>

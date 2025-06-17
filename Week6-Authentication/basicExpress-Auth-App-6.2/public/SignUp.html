@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width= , initial-scale=1.0">
+        <title>Express Auth</title>
+        <link rel="stylesheet" href="./signup.css">
+        
+        <!-- This will add the axios external library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+
+        <!-- Define the functionality of signup() fn -->
+         <script>
+            async function signup() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // fecth or axios
+                try{
+                    await axios.post('http://localhost:3000/signup', {
+                    username : username,
+                    password : password
+                })
+
+                alert("You are successfully SignedUp!");
+                window.location.href = "signin.html"; // redirect
+                } catch (error) {
+                    alert("Signup Failed!")
+                }
+            }
+         </script>
+
+    </head>
+    <body>
+        <div id="signup">
+            <h1 id="heading">Signup</h1>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username"
+                placeholder="Enter Username">
+            <label for = "password">Password</label>
+            <input type="password" name="password" id="password"
+                placeholder="Enter Password">
+            <button onclick="signup()" id="submitBtn">Submit</button>
+            <p style="margin-top: 15px; text-align: center; font-size: 14px;">
+                Already registered?
+                <a href="./SignIn.html"
+                    style="color: lightskyblue; text-decoration: none;">Sign in
+                    here</a>
+            </p>
+        </div>
+    </body>
+</html>

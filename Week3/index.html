@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM(Basics)</title>
+    <style>
+        * {
+            background-color: rgb(71, 143, 192);
+            color: darkblue;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        h1 {
+            font-weight: bolder;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .todoList > li {
+            font-weight: 20px;
+            margin : 20px;
+        }
+
+        .inputItem {
+            margin: 10px 0px 20px 10px;
+            font-weight: bold;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #393838;
+            color: whitesmoke;
+        }
+
+        .addBtn {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid rgb(32, 32, 32);
+            background-color: #393838;
+            color: whitesmoke;
+            font-weight: bold;
+        }
+
+        .addBtn:hover {
+            background-color: rgb(207, 205, 205);
+            color: #393838;
+        }
+
+        .deleteTask {
+            margin: 10px 0px 20px 10px;
+            font-weight: bold;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #393838;
+            color: whitesmoke;
+        }
+
+        .deleteBtn {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid rgb(32, 32, 32);
+            background-color: #393838;
+            color: whitesmoke;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function addTask() {
+            const ol = document.getElementsByClassName('todoList')[0];
+            const li = document.createElement('li');
+            const inputItem = document.getElementsByClassName('inputItem')[0];
+            li.textContent = inputItem.value;
+            ol.appendChild(li);
+            inputItem.value = "";
+        }
+
+        function deleteTask() {
+            const deleteInput = document.getElementsByClassName('deleteTask')[0];
+            const index = parseInt(deleteInput.value);
+            const ol = document.getElementsByClassName('todoList')[0];
+            const items = ol.getElementsByTagName('li');
+            if (!isNaN(index) && index >= 0 && index <= items.length) {
+                const itemToDelete = items[index-1];
+                ol.removeChild(itemToDelete);
+            } else {
+                alert("Invalid Task No.");
+            }
+            deleteTask.value = "";
+        }
+    </script>
+</head>
+<body>
+    <!-- 
+     1. Create(Done), 
+     2. Read(Done), 
+     3. Update(Done), 
+     4. Delete(Done) 
+     -->
+    <h1>Todo List</h1>
+    <ol class = "todoList">
+        <li>Take Classes</li>
+        <li>Go to Gym</li>
+    </ol>
+    <input type="text" placeholder="Add Todo Item" class="inputItem">
+    <input type="submit" value="Add Task" class="addBtn" onclick="addTask()"><br>
+    <input type="text" class="deleteTask" placeholder="Add Task Number">
+    <input type="submit" value="Delete Task" class="deleteBtn" onclick="deleteTask()">
+</body>
+</html>

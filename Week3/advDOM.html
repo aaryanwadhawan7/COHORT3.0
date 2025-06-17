@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advance DOM</title>
+    <style>
+      * {
+        background-color: #1f1f1f;
+        color: white;
+      }
+
+      #inputTask {
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 5px;
+        color: gray;
+        margin-top: 10px;
+      }
+
+      #addBtn {
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 5px;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+    </style>
+
+    <script>
+      let ctr = 0;
+
+      function addTask() {
+        const val = document.getElementById("inputTask").value.trim();
+        if (val === "") return;
+
+        const parentEl = document.getElementById("addedTask");
+
+        const spanEl = document.createElement("span");
+        spanEl.setAttribute("id", "todo-" + ctr);
+        spanEl.setAttribute(
+          "style",
+          "color: white; font-weight: bold; margin-right: 10px;"
+        );
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "deleteBtn";
+        deleteBtn.setAttribute(
+          "style",
+          "border: 1px solid white; margin-left: 10px; border-radius: 5px;"
+        );
+        deleteBtn.onclick = function () {
+          spanEl.remove(); // Remove the task
+        };
+
+        spanEl.textContent = val;
+        spanEl.appendChild(deleteBtn);
+        parentEl.appendChild(spanEl);
+        parentEl.appendChild(document.createElement("br"));
+
+        document.getElementById("inputTask").value = "";
+        ctr++;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="addedTask"></div>
+    <div id="inputElements">
+      <input type="text" id="inputTask" placeholder="Add tasks here" />
+      <button id="addBtn" onclick="addTask()">Add Task</button>
+    </div>
+  </body>
+</html>

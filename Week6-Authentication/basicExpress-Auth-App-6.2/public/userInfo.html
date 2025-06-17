@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Express Auth</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+
+        <script>
+            async function displayUserInformation () {
+                const response = await axios.get('http://localhost:3000/details' , {
+                    headers : {
+                        token : localStorage.getItem('token')
+                    }
+                })
+
+                document.getElementById('username').innerText = `Username : ${response.data.username}`;
+                document.getElementById('password').innerText = `Password : ${response.data.password}`;
+            }
+
+            displayUserInformation ();
+
+            function logout () {
+                localStorage.removeItem('token');
+                window.location.href = "SignIn.html";
+            }
+        </script>
+    </head>
+    <body style="background-color: #1f1f1f;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    height: 100vh;">
+        <div id="userInfo" style="display: flex; flex-direction: column; background-color: #2f2f2f; padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 15px rgb(147, 147, 241);">
+            <h1 id="heading" style="color: beige;">User Information</h1>
+            <span id="username" style="color: beige;
+            font-size: larger;
+            padding: 15px;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            margin: 10px;"></span>
+            
+            <span id="password" style="color: beige;
+            font-size: larger;
+            padding: 15px;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            margin: 10px;"></span>
+
+            <button id="logoutBtn" style="padding: 10px; 
+            background-color: beige; 
+            border : 1px solid #1f1f1f;
+            font-size: larger;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;" onclick="logout()">Logout</button>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dom React Approach</title>
+        <script>
+      // Website -> State -> The variable part of the app
+      //            Components -> How to render state on the screen
+      //            Rendering -> Taking the state and rendering it on the DOM based on the components
+      let todos = [];
+
+      function createTodoComponent(todo) {
+          // Variables(properties) ===> Container displaying these Variables
+          // div(taskContainer) > (h1 + button)
+          const parentContainer = document.querySelector('#taskToAdded');
+          const div = document.createElement('div');
+          const h1 = document.createElement('h1');
+          const btn = document.createElement('button');
+          btn.textContent = 'Delete';
+          // Add delete functionality to button
+          btn.onclick = function deleteTask() {
+            parentContainer.removeChild(div);
+          }
+          h1.innerHTML = todo.title;
+          div.appendChild(h1);
+          div.appendChild(btn);
+          return div;
+      }
+
+      // react
+      function render() {
+          const container = document.querySelector('#taskToAdded');
+          container.innerHTML = "";
+      for (let i = 0; i < todos.length; i++) {
+          const task = createTodoComponent(todos[i]);
+          container.appendChild(task); 
+      }
+      }
+
+      function addTask() {
+          todos.push({
+              title : document.getElementById('inputTask').value
+          });
+          document.getElementById('inputTask').value = "";
+          render();
+      }
+
+      function deleteFirstTask() {
+          todos.splice(0,1);
+          render();
+      }
+
+      function deleteLastTask() {
+          todos.splice(todos.length-1,1);
+          render();
+      }
+    </script>
+
+    <style>
+        * {
+            background-color: #1f1f1f;
+            color: white;
+        }
+
+        button {
+            border : 1px solid white;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        input {
+            color: white;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid white;
+        }
+    </style>
+    </head>
+    <body>
+        <div id="taskToAdded"></div>
+        <input type="text" placeholder="add todo tasks" id="inputTask" />
+        <button id="addBtn" onclick="addTask()">Add Task</button>
+        <button id="deleteLastTask" onclick="deleteLastTask()">
+            Delete Last Task
+        </button>
+        <button id="deleteFirstTask" onclick="deleteFirstTask()">
+            Delete First Task
+        </button>
+    </body>
+</html>
